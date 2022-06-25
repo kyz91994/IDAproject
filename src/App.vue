@@ -1,30 +1,44 @@
 <template>
-  <nav>
-    <router-link to="/">Home</router-link> |
-    <router-link to="/about">About</router-link>
-  </nav>
-  <router-view/>
+<div class="app">
+  <add-product-form></add-product-form>
+  <div class="container">
+    <product-card></product-card>
+    <product-card></product-card>
+    <product-card></product-card>
+    <product-card></product-card>
+    <product-card></product-card>
+    <product-card></product-card>
+    <product-card></product-card>
+    <product-card></product-card>
+    <product-card></product-card>
+  </div>
+
+</div>
 </template>
+<script>
 
-<style>
+
+import ProductCard from "@/components/ProductCard";
+import AddProductForm from "@/components/AddProductForm";
+export default {
+  components: {AddProductForm, ProductCard}
+}
+</script>
+<style lang="scss">
 #app {
-  font-family: Avenir, Helvetica, Arial, sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-  text-align: center;
-  color: #2c3e50;
+  font-family: 'Source Sans Pro';
+  padding: 31px;
 }
-
-nav {
-  padding: 30px;
+.app{
+  display: flex;
+  justify-content: flex-start;
 }
-
-nav a {
-  font-weight: bold;
-  color: #2c3e50;
-}
-
-nav a.router-link-exact-active {
-  color: #42b983;
+.container{
+  width: 1028px;
+  padding-top: 52px;
+  margin-left: 16px;
+  display: flex;
+  gap: 16px;
+  flex-wrap: wrap;
 }
 </style>
