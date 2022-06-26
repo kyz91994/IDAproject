@@ -1,27 +1,38 @@
 <template>
 <div class="app">
-  <add-product-form></add-product-form>
-  <div class="container">
-    <product-card></product-card>
-    <product-card></product-card>
-    <product-card></product-card>
-    <product-card></product-card>
-    <product-card></product-card>
-    <product-card></product-card>
-    <product-card></product-card>
-    <product-card></product-card>
-    <product-card></product-card>
-  </div>
-
+  <add-product-form
+      @addProduct="addProduct"
+  />
+  <product-list
+      @removeProduct="removeProduct"
+      :products="products"
+  />
 </div>
 </template>
 <script>
-
-
-import ProductCard from "@/components/ProductCard";
 import AddProductForm from "@/components/AddProductForm";
+import ProductList from "@/components/ProductList";
 export default {
-  components: {AddProductForm, ProductCard}
+  components: {ProductList, AddProductForm},
+  data(){
+    return{
+      products: []
+    }
+  },
+  methods: {
+    addProduct(product){
+      this.products.push(product)
+      sessionStorage.setItem(product.id, JSON.stringify(product))
+      console.log(sessionStorage)
+    },
+    removeProduct(productId){
+      this.products = this.products.filter(prod=> prod.id !== productId)
+      sessionStorage.removeItem(productId)
+    }
+  },
+  mounted(){
+    this.products = [...Object.values(sessionStorage).sort()].map(prod=> JSON.parse(prod))
+  }
 }
 </script>
 <style lang="scss">
@@ -33,12 +44,12 @@ export default {
   display: flex;
   justify-content: flex-start;
 }
-.container{
-  width: 1028px;
-  padding-top: 52px;
-  margin-left: 16px;
-  display: flex;
-  gap: 16px;
-  flex-wrap: wrap;
-}
+//.container{
+//  width: 1028px;
+//  padding-top: 52px;
+//  margin-left: 16px;
+//  display: flex;
+//  gap: 16px;
+//  flex-wrap: wrap;
+//}
 </style>
