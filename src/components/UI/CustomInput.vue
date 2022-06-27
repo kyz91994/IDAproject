@@ -1,7 +1,7 @@
 <template>
   <input :type="type"
          class="custom_input"
-         :value="modelValue.replace(/\d{1,3}(?=(\d{3})+(?!\d))/g, '$&,')"
+         :value="modelValue"
          @input="updateInput"
   >
 </template>

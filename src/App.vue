@@ -5,8 +5,13 @@
   />
   <product-list
       @removeProduct="removeProduct"
-      :products="products"
+      :products="sortedProducts"
+      @sortedProducts="setSelectedSort"
+      v-if="!postsLoading"
   />
+  <div v-else>
+    <img src="./assets/preloader.svg"/>
+  </div>
 </div>
 </template>
 <script>
@@ -16,22 +21,44 @@ export default {
   components: {ProductList, AddProductForm},
   data(){
     return{
-      products: []
+      products: [],
+      selectedSort: 'default',
+      postsLoading: false
     }
   },
   methods: {
     addProduct(product){
       this.products.push(product)
       sessionStorage.setItem(product.id, JSON.stringify(product))
-      console.log(sessionStorage)
     },
     removeProduct(productId){
       this.products = this.products.filter(prod=> prod.id !== productId)
       sessionStorage.removeItem(productId)
+    },
+    setSelectedSort(value){
+      this.selectedSort = value
     }
   },
   mounted(){
-    this.products = [...Object.values(sessionStorage).sort()].map(prod=> JSON.parse(prod))
+    this.postsLoading = true
+    if(sessionStorage.length){
+      this.products = [...Object.values(sessionStorage)].map(prod=> JSON.parse(prod)).sort()
+    }
+    this.postsLoading = false
+  },
+  computed:{
+    sortedProducts(){
+      const products = this.products.map(product=> ({...product}))
+      if(this.selectedSort==='priceMax'){
+        return [...products].sort((post1, post2) =>post1['price']-post2['price']).reverse()
+      }else if(this.selectedSort === 'default') {
+        return [...products]
+      }else if(this.selectedSort==='price'){
+        return [...products].sort((post1, post2) =>post1[this.selectedSort]-post2[this.selectedSort])
+      }else {
+       return [...products.sort((post1, post2) =>post1[this.selectedSort]?.localeCompare(post2[this.selectedSort]))]
+      }
+    }
   }
 }
 </script>
@@ -44,12 +71,4 @@ export default {
   display: flex;
   justify-content: flex-start;
 }
-//.container{
-//  width: 1028px;
-//  padding-top: 52px;
-//  margin-left: 16px;
-//  display: flex;
-//  gap: 16px;
-//  flex-wrap: wrap;
-//}
 </style>

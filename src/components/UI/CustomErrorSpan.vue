@@ -10,11 +10,6 @@ export default {
 
 <style scoped lang="scss">
 .custom-span__error{
-  //position: absolute;
-  //width: 100px;
-  //height: 10px;
-  //left: 56px;
-  //top: 315px;
   font-style: normal;
   font-weight: 400;
   font-size: 8px;
