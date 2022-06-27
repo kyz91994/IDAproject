@@ -64,7 +64,7 @@ export default {
   }
 
   &__photo {
-    border-radius: 4px 4px 0px 0px;;
+    border-radius: 4px 4px 0 0;;
   }
 
   &__body {
