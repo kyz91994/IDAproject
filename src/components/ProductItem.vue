@@ -49,13 +49,13 @@ export default {
   width: 332px;
   height: 423px;
   background: #FFFEFB;
-  box-shadow: 0px 20px 30px rgba(0, 0, 0, 0.04), 0px 6px 10px rgba(0, 0, 0, 0.02);
+  box-shadow: 0 20px 30px rgba(0, 0, 0, 0.04), 0 6px 10px rgba(0, 0, 0, 0.02);
   border-radius: 4px;
   display: flex;
   flex-direction: column;
 
   &:hover {
-    cursor: url(../assets/hover.png), default;
+    cursor: url('../assets/hover.svg'), default;
   }
 
   &__image-body {
@@ -118,6 +118,9 @@ export default {
     top: -8px;
     right: -8px;
     background: none;
+    &:hover {
+      cursor: url('../assets/hover.svg'), default;
+    }
   }
 
 }

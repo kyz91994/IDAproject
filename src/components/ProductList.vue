@@ -55,7 +55,7 @@ export default {
 }
 </script>
 
-<style scoped>
+<style scoped lang="scss">
 .container{
   max-width: 1028px;
   padding-top: 52px;
